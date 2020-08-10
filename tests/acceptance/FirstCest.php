@@ -7,7 +7,7 @@ class HomepageCest
         $I->see('Home');
         $I->see('Madison');
         $I->see('Kenedy');
-        $I->see('Crisscross');
+        $I->see('Criscross');
 
         $I->click('Madison');
         $I->click('Kenedy');
