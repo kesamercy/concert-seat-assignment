@@ -1,46 +1,46 @@
 {
-  "venue": {
-    "layout": {
-      "rows": 10,
-      "colums": 50
+    "venue": {
+        "layout": {
+            "rows": 20,
+            "column": 7
+        }
+    },
+    "seats": {
+        "a1": {
+            "id": "a1",
+            "row": "a",
+            "column": 1,
+            "status": "AVAILABLE"
+        },
+        "b5": {
+            "id": "b5",
+            "row": "b",
+            "column": 5,
+            "status": "AVAILABLE"
+        },
+        "h7": {
+            "id": "h7",
+            "row": "h",
+            "column": 7,
+            "status": "AVAILABLE"
+        },
+        "e10": {
+            "id": "e10",
+            "row": "e",
+            "column": 10,
+            "status": "AVAILABLE"
+        },
+        "d49": {
+            "id": "d49",
+            "row": "d",
+            "column": 49,
+            "status": "AVAILABLE"
+        },
+        "g8": {
+            "id": "g8",
+            "row": "g",
+            "column": 8,
+            "status": "AVAILABLE"
+        }
     }
-  },
-  "seats": {
-    "a1": {
-      "id": "a1",
-      "row": "a",
-      "column": 1,
-      "status": "AVAILABLE"
-    },
-    "b5": {
-      "id": "b5",
-      "row": "b",
-      "column": 5,
-      "status": "AVAILABLE"
-    },
-    "h7": {
-      "id": "h7",
-      "row": "h",
-      "column": 7,
-      "status": "AVAILABLE"
-    },
-    "e10": {
-      "id": "e10",
-      "row": "e",
-      "column": 10,
-      "status": "AVAILABLE"
-    },
-    "d49": {
-      "id": "d49",
-      "row": "d",
-      "column": 49,
-      "status": "AVAILABLE"
-    },
-    "g8": {
-      "id": "g8",
-      "row": "g",
-      "column": 8,
-      "status": "AVAILABLE"
-    }
-  }
 }
