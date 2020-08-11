@@ -1,11 +1,15 @@
 <?php
+session_start();
 
 $numrows = 0;
 $numcols = 0;
 $a = 0;
 $b = 0;
 $newval = "";
-$seats;
+$seats = array();
+
+// use sessions to update the seats
+
 
 
 if (count($_POST) > 0) {
@@ -78,6 +82,8 @@ function parseJsonFile($filename)
     global $newval;
     global $seats;
 
+    
+
     if (file_exists($filename)) {
 
         $json = file_get_contents($filename);
@@ -106,16 +112,16 @@ function parseJsonFile($filename)
                 
                 array_push($seats, $newval);
 
-                print_r($seats);
+               
 
                 // echo $newval, "this is the letter value";
-                echo "<br>";
+             
                 // make a list of the seats available 
                 
 
             }
 
-
+            $_SESSION['seats-available'] = $seats;
         } else {
             echo "Error, Json file has no content";
         }
@@ -154,6 +160,9 @@ function parseJsonFile($filename)
     global $b;
     $status = false;
 
+    $_SESSION['rows'] = $numrows;
+    $_SESSION['cols'] = $numcols;
+
     echo "<table class='w3-table'>";
     while ($a <= $numrows) {
         echo "<tr>";
@@ -162,10 +171,7 @@ function parseJsonFile($filename)
             $stra = strval($a);
             $strb = strval($b);
             $newab = $stra.$strb;
-            echo $newab, "this is the value of a +b in string";
-
-            echo "<br>";
-            echo $newval;
+           
             // check if the row and col are in avail seat list.
             foreach ($seats as $key => $value) {
 
@@ -198,6 +204,23 @@ function parseJsonFile($filename)
 
     
     ?>
+
+    <div>
+        <form method="post" action="find-seat.php">
+            <label for="seat-choice">How many seats would you like to book:</label>
+
+            <select id="seat-choice" name="seat-choice">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <!-- <input type="hidden" name="seats-avail" value="$seats" id=""> -->
+            <input type="submit" value="Submit">
+        </form>
+
+
+    </div>
 
     <script>
     </script>
