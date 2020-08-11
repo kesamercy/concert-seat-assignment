@@ -1,5 +1,10 @@
 <?php
 
+$numrows = 0;
+$numcols = 0;
+$a = 0;
+$b = 0;
+
 
 if (count($_POST) > 0) {
     $venue = $_POST['venue'];
@@ -8,7 +13,7 @@ if (count($_POST) > 0) {
         $content = parseJsonFile("assets/madison.json");
         $result = printValues($content);
         echo "<h3>" . $result["total"] . " value(s) found: </h3>";
-        echo "<p>Madison</p>";
+        echo implode("<br>", $result["values"]);
 
         // get the number of rows and cols.accordion
         // get the list of the number of seats available. 
@@ -66,13 +71,20 @@ function printValues($arr) {
 
 function parseJsonFile($filename)
 {
+    global $numrows;
+    global $numcols;
 
     if (file_exists($filename)) {
 
         $json = file_get_contents($filename);
+       
         if (!empty($json)) {
 
             $filecontent = json_decode($json, true);
+            $numrows =  $filecontent['venue']['layout']['rows'];
+            $numcols =  $filecontent['venue']['layout']['column'];
+
+
         } else {
             echo "Error, Json file has no content";
         }
@@ -83,4 +95,55 @@ function parseJsonFile($filename)
 
     return $filecontent;
 }
+?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Concert Seats</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+
+
+    <?php
+
+    echo $numcols;
+    echo $numrows;
+
+    global $a;
+    global $b;
+
+    echo "<table class='w3-table'>";
+    while ($a <= $numrows) {
+        echo "<tr>";
+        while ($b <= $numcols) {
+            
+           echo " <td><img src='images/occupied-seat.png' alt='occupied seat'></td>";
+            
+            ++$b;
+           
+        }
+        echo "</tr>";
+        ++$a;
+        $b =0;
+    }
+    echo "</table>"
+
+    
+    ?>
+
+    <script>
+    </script>
+
+</body>
+
+</html>
