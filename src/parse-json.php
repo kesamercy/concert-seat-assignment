@@ -7,8 +7,19 @@ if (count($_POST) > 0) {
     if ($venue == "madison") {
         $content = parseJsonFile("assets/madison.json");
         $result = printValues($content);
-        // echo "<h3>" . $result["total"] . " value(s) found: </h3>";
+        echo "<h3>" . $result["total"] . " value(s) found: </h3>";
         echo "<p>Madison</p>";
+
+        // get the number of rows and cols.accordion
+        // get the list of the number of seats available. 
+        // draw the seat for the stadium based on the number of rows and cols
+        // add an image of empty seat to all the seats
+        // add an image of available seat to all the open seats based on the return from the json
+        
+
+
+
+
     } elseif ($venue == "criscross") {
         $content = parseJsonFile("assets/criscross.json");
         $result = printValues($content);

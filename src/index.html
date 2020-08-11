@@ -13,34 +13,35 @@
 </head>
 
 <body>
-    <div class="content">
-
-        <p>Home</p>
-
-
-        <form method="post" action="parse-json.php">
-            <input type="hidden" name="venue" value="madison">
-            <input class="w3-btn" type="submit" value="Madison">
-        </form>
-
-
-        <form method="post" action="parse-json.php">
-            <input type="hidden" name="venue" value="kenedy">
-            <input class="w3-btn" type="submit" value="Kenedy">
-        </form>
-
-        <form method="post" action="parse-json.php">
-            <input type="hidden" name="venue" value="criscross">
-            <input class="w3-btn" type="submit" value="Criscross">
-        </form>
 
 
 
+
+    <div class="w3-display-container w3-green w3-animate-opacity" style="height:100vh;">
+        <div class="w3-display-topleft w3-padding">Home</div>
+
+        <div class="w3-display-middle w3-padding">
+
+
+            <h1> Welcome, please select a concert venue you would like to book a seat</h1>
+            <form method="post" action="parse-json.php">
+                <input type="hidden" name="venue" value="madison">
+                <input class="w3-btn" type="submit" value="Madison">
+            </form>
+
+
+            <form method="post" action="parse-json.php">
+                <input type="hidden" name="venue" value="kenedy">
+                <input class="w3-btn" type="submit" value="Kenedy">
+            </form>
+            <form method="post" action="parse-json.php">
+                <input type="hidden" name="venue" value="criscross">
+                <input class="w3-btn" type="submit" value="Criscross">
+            </form>
+
+        </div>
 
     </div>
-
-
-
     <script>
     </script>
 
