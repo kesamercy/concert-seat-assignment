@@ -1,8 +1,8 @@
 {
     "venue": {
         "layout": {
-            "rows": 5,
-            "column": 30
+            "rows": 15,
+            "column": 8
         }
     },
     "seats": {

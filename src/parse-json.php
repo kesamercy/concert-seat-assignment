@@ -4,6 +4,8 @@ $numrows = 0;
 $numcols = 0;
 $a = 0;
 $b = 0;
+$newval = "";
+$seats;
 
 
 if (count($_POST) > 0) {
@@ -73,6 +75,8 @@ function parseJsonFile($filename)
 {
     global $numrows;
     global $numcols;
+    global $newval;
+    global $seats;
 
     if (file_exists($filename)) {
 
@@ -83,6 +87,33 @@ function parseJsonFile($filename)
             $filecontent = json_decode($json, true);
             $numrows =  $filecontent['venue']['layout']['rows'];
             $numcols =  $filecontent['venue']['layout']['column'];
+
+            $seats = array($newval);
+
+
+            foreach($filecontent['seats'] as $key=>$value){
+                // echo $value['row'];
+                // echo $value['column'];
+
+                $postn = ord(strtoupper($value['row'])) - ord('A') + 1;
+                // echo $postn;
+
+                $rowstr = strval($postn);
+                $colstr = strval($value['column']);
+
+                $newval = $rowstr.$colstr;
+
+                
+                array_push($seats, $newval);
+
+                print_r($seats);
+
+                // echo $newval, "this is the letter value";
+                echo "<br>";
+                // make a list of the seats available 
+                
+
+            }
 
 
         } else {
@@ -116,19 +147,46 @@ function parseJsonFile($filename)
 
     <?php
 
-    echo $numcols;
-    echo $numrows;
+    // echo $numcols;
+    // echo $numrows;
 
     global $a;
     global $b;
+    $status = false;
 
     echo "<table class='w3-table'>";
     while ($a <= $numrows) {
         echo "<tr>";
         while ($b <= $numcols) {
+
+            $stra = strval($a);
+            $strb = strval($b);
+            $newab = $stra.$strb;
+            echo $newab, "this is the value of a +b in string";
+
+            echo "<br>";
+            echo $newval;
+            // check if the row and col are in avail seat list.
+            foreach ($seats as $key => $value) {
+
+                if ($newab == $value) {
+                    
+                    $status = true;
+                break;
+                } 
+               
+            }
+            if ($status) {
+               
+                echo " <td><img src='images/empty-seat.png' alt='occupied seat'></td>";
             
-           echo " <td><img src='images/occupied-seat.png' alt='occupied seat'></td>";
+            } else {
+                echo " <td><img src='images/occupied-seat.png' alt='occupied seat'></td>";
             
+            }
+            
+            
+          $status = false;
             ++$b;
            
         }
