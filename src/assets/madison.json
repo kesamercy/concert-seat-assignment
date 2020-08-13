@@ -2,14 +2,14 @@
     "venue": {
         "layout": {
             "rows": 20,
-            "column": 10
+            "column": 11
         }
     },
     "seats": {
-        "a1": {
-            "id": "b5",
-            "row": "b",
-            "column": 5,
+        "a6": {
+            "id": "a6",
+            "row": "a",
+            "column": 6,
             "status": "AVAILABLE"
         },
         "b8": {

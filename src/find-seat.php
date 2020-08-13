@@ -22,7 +22,7 @@ if (count($_POST) > 0) {
             while ($seatscounted <= $numcols && !$seatassigned) {
                 //    first check the middle seat for assignment
                 if (!$checkmiddle) {
-                    $mid = $numcols / 2;
+                    $mid = ceil($numcols / 2);
                     $stra = strval($row);
                     $strb = strval($mid);
                     $seattocheck = $stra . $strb;
@@ -33,7 +33,7 @@ if (count($_POST) > 0) {
                         // if the middle seat is available, assign it
                         if ($seattocheck == $value) {
                             $seatassigned = true;
-                            echo $seattocheck, "this is the seat";
+                            // echo $seattocheck, "this is the seat";
                             break;
                         }
 
@@ -43,7 +43,7 @@ if (count($_POST) > 0) {
                 } else {
                     //   check the left postion
                     if (!$checkright) {
-                        $findseat = ($numcols / 2) + $postn;
+                        $findseat = ceil($numcols / 2) + $postn;
                         $stra = strval($row);
                         $strb = strval($findseat);
                         $seattocheck = $stra . $strb;
@@ -54,7 +54,7 @@ if (count($_POST) > 0) {
                             // if the middle seat is available, assign it
                             if ($seattocheck == $value) {
                                 $seatassigned = true;
-                                echo $seattocheck, "this is the seat";
+                                // echo $seattocheck, "this is the seat";
                                 break;
                             }
 
@@ -63,7 +63,7 @@ if (count($_POST) > 0) {
                         ++$seatscounted;
                     }
                     elseif (!$checkleft) {
-                        $findseat = ($numcols / 2) - $postn;
+                        $findseat = ceil($numcols / 2) - $postn;
                         $stra = strval($row);
                         $strb = strval($findseat);
                         $seattocheck = $stra . $strb;
@@ -74,7 +74,7 @@ if (count($_POST) > 0) {
                             // if the middle seat is available, assign it
                             if ($seattocheck == $value) {
                                 $seatassigned = true;
-                                echo $seattocheck, "this is the seat";
+                                // echo $seattocheck, "this is the seat";
                                 break;
                             }
 
