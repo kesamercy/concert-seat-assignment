@@ -491,7 +491,7 @@ if (count($_POST) > 0) {
                                 // echo $seattocheckright, "the right seat";
                                 // print_r($seats);
 
-                                $midleft = ceil($numcols / 2) - 1;
+                                $midleft = $findseat - 1;
                                 $stra = strval($row);
                                 $strb = strval($midleft);
                                 $seattocheckleft = $stra . $strb;
