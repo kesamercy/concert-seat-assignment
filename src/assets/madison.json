@@ -2,7 +2,7 @@
     "venue": {
         "layout": {
             "rows": 20,
-            "column": 7
+            "column": 10
         }
     },
     "seats": {
@@ -27,13 +27,13 @@
         "e10": {
             "id": "e10",
             "row": "e",
-            "column": 10,
+            "column": 4,
             "status": "AVAILABLE"
         },
         "d49": {
             "id": "d49",
             "row": "d",
-            "column": 49,
+            "column": 2,
             "status": "AVAILABLE"
         },
         "g8": {
