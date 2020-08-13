@@ -54,11 +54,7 @@ ul.topnav li.right {
 }
 
 
-/* styling for the seat arrangement */
-
-.seat-form form {
-    margin-top: 40%;
-}
+/* index page styling */
 
 .index-page {
     background-repeat: no-repeat;
@@ -72,7 +68,14 @@ ul.topnav li.right {
     padding-top: 30px;
 }
 
-.venue-page h1 {
+
+/* styling for the seat arrangement */
+
+.seat-form form {
+    margin-top: 40%;
+}
+
+.index-title h1 {
     font-size: 88px;
     font-weight: 600;
 }
@@ -82,4 +85,6 @@ ul.topnav li.right {
     color: black;
 }
 
-.seat-page {}
+.seat-arrangment {
+    /* width: 50%; */
+}

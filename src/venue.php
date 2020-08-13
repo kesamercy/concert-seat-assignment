@@ -3,8 +3,8 @@ session_start();
 
 $numrows = 0;
 $numcols = 0;
-$a = 0;
-$b = 0;
+$a = 1;
+$b = 1;
 $newval = "";
 $seats = array();
 
@@ -116,13 +116,12 @@ function parseJsonFile($filename)
         <ul class='topnav'>
             <li><a class='logo' href='index.html'>The Venue</a></li>
             <li class='right'><a href='venue.php'>Select Seat</a></li>
-            <li class='right'><a href='about.php'>About</a></li>
-            <li class='right'><a class='active' href='index.php'>Home</a></li>
+            <li class='right'><a class='active' href='index.html'>Home</a></li>
         </ul>
 
-        <div class="w3-row seat-arrangment">
+        <div class="w3-row">
 
-            <div class="w3-half w3-center">
+            <div class="w3-half seat-arrangment w3-center">
 
                 <?php
                 if ($venue == "madison") {
@@ -131,12 +130,12 @@ function parseJsonFile($filename)
                     echo "<h1 class='w3-padding-64'>Madison Square Garden Seating</h1>";
                 } elseif ($venue == "criscross") {
                     $content = parseJsonFile("assets/criscross.json");
-                    $result = printValues($content);
-                    echo "<h1 class='w3-padding-64>Criscross Seating.</h1>";
+                    $result = printValues($content); 
+                    echo "<h1 class='w3-padding-64'>Criscross Seating.</h1>";
                 } elseif ($venue == "kenedy") {
                     $content = parseJsonFile("assets/kenedy.json");
                     $result = printValues($content);
-                    echo "<h1 class='w3-padding-64>JF Kenedey Center Seating.</h1>";
+                    echo "<h1 class='w3-padding-64'>JF Kenedey Center Seating.</h1>";
                 } else {
                     echo "Error, invalid input";
                 }

@@ -101,29 +101,28 @@ if (count($_POST) > 0) {
         <ul class='topnav'>
             <li><a class='logo' href='index.html'>The Venue</a></li>
             <li class='right'><a href='venue.php'>Select Seat</a></li>
-            <li class='right'><a href='about.php'>About</a></li>
-            <li class='right'><a class='active' href='index.php'>Home</a></li>
+            <li class='right'><a class='active' href='index.html'>Home</a></li>
         </ul>
 
         <div id="id01" class="w3-modal">
             <div class="w3-modal-content">
-                
-                    <span onclick="document.getElementById('id01').style.display='none'"
-                        class="w3-button w3-display-topright">&times;</span>
-                    <form class="w3-container w3-card-4" action="confirm.php">
-                        <h2 class="w3-text-black">Personal Info</h2>
-                        <p>Enter personal information for your booking.</p>
-                        <p>
-                            <label class="w3-text-black"><b>First and Last Name</b></label>
-                            <input class="w3-input w3-border" name="names" type="text"></p>
-                        <p>
-                            <label class="w3-text-black"><b>Email</b></label>
-                            <input class="w3-input w3-border" name="email" type="text"></p>
-                        <p>
-                            <button class="w3-btn w3-black">Confirm Order</button></p>
-                    </form>
 
-                
+                <span onclick="document.getElementById('id01').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <form class="w3-container w3-card-4" action="confirm.php">
+                    <h2 class="w3-text-black">Personal Info</h2>
+                    <p>Enter personal information for your booking.</p>
+                    <p>
+                        <label class="w3-text-black"><b>First and Last Name</b></label>
+                        <input class="w3-input w3-border" name="names" type="text"></p>
+                    <p>
+                        <label class="w3-text-black"><b>Email</b></label>
+                        <input class="w3-input w3-border" name="email" type="text"></p>
+                    <p>
+                        <button class="w3-btn w3-black">Confirm Order</button></p>
+                </form>
+
+
             </div>
         </div>
 

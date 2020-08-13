@@ -7,7 +7,6 @@ if (count($_POST) > 0) {
     $email = $_POST['email'];
 
     $to = $_POST["email"];
-    $code = strval(mt_rand(100000, 999999));
     $message = "Concert Reciept ";
     $message = $_POST['names'];
     $message = "Seat Number";
