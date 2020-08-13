@@ -2,26 +2,26 @@
     "venue": {
         "layout": {
             "rows": 20,
-            "column": 11
+            "column": 12
         }
     },
     "seats": {
-        "c1": {
-            "id": "c1",
+        "c5": {
+            "id": "c5",
             "row": "c",
-            "column": 1,
+            "column": 5,
             "status": "AVAILABLE"
         },
-        "c2": {
-            "id": "c2",
+        "c4": {
+            "id": "c4",
             "row": "c",
-            "column": 2,
+            "column": 4,
             "status": "AVAILABLE"
         },
-        "b7": {
-            "id": "b7",
-            "row": "b",
-            "column": 7,
+        "c3": {
+            "id": "c",
+            "row": "c3",
+            "column": 3,
             "status": "AVAILABLE"
         },
         "e4": {
