@@ -8,6 +8,7 @@ if (count($_POST) > 0) {
     $numrows = $_SESSION['rows'];
     $numcols = $_SESSION['cols'];
     $seatassigned = false;
+    $doubleseats = array();
 
     if ($seatrequest == 1) {
 
@@ -16,7 +17,7 @@ if (count($_POST) > 0) {
             $postn = 1;
             $seatscounted = 1;
             $checkmiddle = false;
-           
+
             $checkleft = false;
             $checkright = false;
             while ($seatscounted <= $numcols && !$seatassigned) {
@@ -61,8 +62,7 @@ if (count($_POST) > 0) {
                         }
                         $checkright = true;
                         ++$seatscounted;
-                    }
-                    elseif (!$checkleft) {
+                    } elseif (!$checkleft) {
                         $findseat = ceil($numcols / 2) - $postn;
                         $stra = strval($row);
                         $strb = strval($findseat);
@@ -82,21 +82,174 @@ if (count($_POST) > 0) {
 
                         $checkleft = true;
                         ++$seatscounted;
-                    } 
-                    elseif($checkleft && $checkright && !$seatassigned) {
+                    } elseif ($checkleft && $checkright && !$seatassigned) {
                         $checkleft = false;
                         $checkright = false;
                         ++$postn;
-                        
 
                     }
 
                 }
-                
+
             }
         }
     } elseif ($seatrequest == 2) {
-        echo "2 seat request";
+        global $doubleseats;
+        // check the rows only if a seat has not been assigned
+        for ($row = 1; $row <= $numrows; $row++ && !$seattocheck) {
+            $postn = 1;
+            $seatscounted = 1;
+            $checkmiddle = false;
+            $empty = "";
+
+            $checkleft = false;
+            $checkright = false;
+
+            while ($seatscounted <= $numcols && !$seatassigned) {
+                $doubleseats = array($empty);
+                //    first check the middle seat for assignment
+                if (!$checkmiddle) {
+                    $mid = ceil($numcols / 2);
+                    $stra = strval($row);
+                    $strb = strval($mid);
+                    $seattocheck = $stra . $strb;
+
+                    // check the array of seats available to find if it matches the current seat
+                    foreach ($seats as $key => $value) {
+
+                        // if the middle seat is available, check if neighto right is avail
+                        if ($seattocheck == $value) {
+
+                            // check if the neigh seat
+                            $midright = ceil($numcols / 2) + 1;
+                            $stra = strval($row);
+                            $strb = strval($midright);
+                            $seattocheckright = $stra . $strb;
+
+                            $midleft = ceil($numcols / 2) - 1;
+                            $stra = strval($row);
+                            $strb = strval($midleft);
+                            $seattocheckleft = $stra . $strb;
+
+                            if (in_array($seattocheckright, $seats)) {
+
+                                array_push($doubleseats, $seattocheck);
+                                // $doubleseats($seattocheck);
+                                array_push($doubleseats, $seattocheckright);
+                                $seatassigned = true;
+                                echo "was assigned";
+                                print_r($doubleseats);
+                                break;
+                            } elseif (in_array($seattocheckleft, $seats)) {
+                                $doubleseats($seattocheck);
+                                array_push($doubleseats, $seattocheckleft);
+                                $seatassigned = true;
+                                break;
+                            }
+
+                        }
+
+                    }
+
+                    $checkmiddle = true;
+                } else {
+                    //   check the left postion
+                    if (!$checkright) {
+                        $findseat = ceil($numcols / 2) + $postn;
+                        $stra = strval($row);
+                        $strb = strval($findseat);
+                        $seattocheck = $stra . $strb;
+
+                        // check the array of seats available to find if it matches the current seat
+                        foreach ($seats as $key => $value) {
+
+                            // if the middle seat is available, assign it
+                            if ($seattocheck == $value) {
+                               // check if the neigh seat
+                               $midright = $findseat + 1;
+                               $stra = strval($row);
+                               $strb = strval($midright);
+                               $seattocheckright = $stra . $strb;
+
+                               $midleft = ceil($numcols / 2) - 1;
+                               $stra = strval($row);
+                               $strb = strval($midleft);
+                               $seattocheckleft = $stra . $strb;
+
+                               if (in_array($seattocheckright, $seats)) {
+
+                                   array_push($doubleseats, $seattocheck);
+                                   // $doubleseats($seattocheck);
+                                   array_push($doubleseats, $seattocheckright);
+                                   $seatassigned = true;
+                                   echo "was assigned";
+                                   print_r($doubleseats);
+                                   break;
+                               } elseif (in_array($seattocheckleft, $seats)) {
+                                   $doubleseats($seattocheck);
+                                   array_push($doubleseats, $seattocheckleft);
+                                   $seatassigned = true;
+                                   break;
+                               }
+                            }
+
+                        }
+                        $checkright = true;
+                        ++$seatscounted;
+                    } elseif (!$checkleft) {
+                        $findseat = ceil($numcols / 2) - $postn;
+                        $stra = strval($row);
+                        $strb = strval($findseat);
+                        $seattocheck = $stra . $strb;
+
+                        // check the array of seats available to find if it matches the current seat
+                        foreach ($seats as $key => $value) {
+
+                            // if the middle seat is available, assign it
+                            if ($seattocheck == $value) {
+                                // check if the neigh seat
+                                $midright = $findseat + 1;
+                                $stra = strval($row);
+                                $strb = strval($midright);
+                                $seattocheckright = $stra . $strb;
+
+                                $midleft = ceil($numcols / 2) - 1;
+                                $stra = strval($row);
+                                $strb = strval($midleft);
+                                $seattocheckleft = $stra . $strb;
+
+                                if (in_array($seattocheckright, $seats)) {
+
+                                    array_push($doubleseats, $seattocheck);
+                                    // $doubleseats($seattocheck);
+                                    array_push($doubleseats, $seattocheckright);
+                                    $seatassigned = true;
+                                    echo "was assigned";
+                                    print_r($doubleseats);
+                                    break;
+                                } elseif (in_array($seattocheckleft, $seats)) {
+                                    $doubleseats($seattocheck);
+                                    array_push($doubleseats, $seattocheckleft);
+                                    $seatassigned = true;
+                                    break;
+                                }
+                            }
+
+                        }
+
+                        $checkleft = true;
+                        ++$seatscounted;
+                    } elseif ($checkleft && $checkright && !$seatassigned) {
+                        $checkleft = false;
+                        $checkright = false;
+                        ++$postn;
+
+                    }
+
+                }
+
+            }
+        }
     } elseif ($seatrequest == 3) {
         echo "3 seat request";
     } else {
@@ -160,22 +313,37 @@ if (count($_POST) > 0) {
 
 
             <?php
-                $arrayletters = array('0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X ', 'Y', 'Z');
-                // get the first char of the string
-                // convert row to a string
-                // add it back to newab and then display the number
-                $getrow = $seattocheck[0];
-                $getnum = $seattocheck[1];
-                $rowletter = $arrayletters[$getrow];
-                $newseat = $rowletter . $getnum;
+$arrayletters = array('0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X ', 'Y', 'Z');
 
-                echo "<h1> Best Seat Option: ", $newseat . "</h1>";
+if ($seatrequest == 1) {
+    $getrow = $seattocheck[0];
+    $getnum = $seattocheck[1];
+    $rowletter = $arrayletters[$getrow];
+    $newseat = $rowletter . $getnum;
 
-                // print_r($seats);
+    echo "<h1> Best Seat Option: ", $newseat . "</h1>";
 
-                $_SESSION['seat-num'] = $newseat;
+    // print_r($seats);
 
-                ?>
+    $_SESSION['seat-num'] = $newseat;
+
+} elseif ($seatrequest == 2) {
+
+    print_r($doubleseats);
+    $getfirstseat = $doubleseats[1][0];
+    $seatletterone = $arrayletters[$getfirstseat];
+    $firstcolnum = $doubleseats[1][1];
+    $seatone = $seatletterone . $firstcolnum;
+
+    $getsecondseat = $doubleseats[2][0];
+    $seatlettertwo = $arrayletters[$getsecondseat];
+    $secondcolnum = $doubleseats[2][1];
+    $seattwo = $seatlettertwo . $secondcolnum;
+
+    echo "<h1> Best Seat Option: ", $seatone . " , ", $seattwo . "</h1>";
+}
+
+?>
 
             <div class="w3-container w3-center">
                 <br><br>
