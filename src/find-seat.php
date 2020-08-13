@@ -98,7 +98,7 @@ if (count($_POST) > 0) {
     } elseif ($seatrequest == 2) {
         echo "2 seat request";
     } elseif ($seatrequest == 3) {
-        echo "2 seat request";
+        echo "3 seat request";
     } else {
         echo "Invalid number of seats requested";
     }
