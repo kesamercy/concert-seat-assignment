@@ -1,15 +1,85 @@
 body,
 h1 {
-    font-family: "Raleway", sans-serif
+    font-family: "Roboto", sans-serif;
 }
 
 body,
 html {
     height: 100%;
+    color: white;
+    background-color: #f2efea;
+}
+
+
+/* nav bar styling */
+
+
+/* nav bar sytles for mobile and desktop */
+
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+ul.topnav li {
+    float: left;
+}
+
+ul.topnav li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.topnav li a:visited {
+    color: var(--sitepurple);
+    text-decoration: underline;
+}
+
+ul.topnav li a:hover {
+    color: orange;
+    text-decoration: underline;
+}
+
+ul.topnav li.right {
+    float: right;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+
+/* styling for the seat arrangement */
+
+.seat-form form {
+    margin-top: 40%;
+}
+
+.index-page {
+    background-repeat: no-repeat;
+    background: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url(images/concert-image.jpg);
+    background-size: cover;
+}
+
+.content {
+    margin: auto;
+    max-width: 1500px;
+    padding-top: 30px;
+}
+
+.venue-page h1 {
+    font-size: 88px;
+    font-weight: 600;
+}
+
+.venue-content,
+.seat-page {
     color: black;
 }
 
-
-.content {
-    /* max-width: 1500px; */
-}
+.seat-page {}

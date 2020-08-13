@@ -6,13 +6,13 @@ if (count($_POST) > 0) {
     $seats = $_SESSION['seats-available'];
     $numseats = $_POST['seat-choice'];
 
-    print_r($seats);
+    // print_r($seats);
 
     $numrows = $_SESSION['rows'];
     $numcols = $_SESSION['cols'];
 
-    echo $numcols, "the number of rows";
-    echo $numrows, "the number of cols";
+    // echo $numcols, "the number of rows";
+    // echo $numrows, "the number of cols";
 
     $a = 0;
     $b = 0;
@@ -45,10 +45,10 @@ if (count($_POST) > 0) {
             // check if the middle seat appears in the array for the available seats
             foreach ($seats as $key => $value) {
 
-                echo $value;
-                echo "<br>";
-                echo "the value for ab";
-                echo $newab;
+                // echo $value;
+                // echo "<br>";
+                // echo "the value for ab";
+                // echo $newab;
                 if ($newab == $value) {
                     $status = true;
                     break;
@@ -59,7 +59,7 @@ if (count($_POST) > 0) {
             ++$time;
             if ($status) {
                 # return the seat assigned
-                echo "the seat assinged is ", $newab;
+                // echo "the seat assinged is ", $newab;
 
                 break;
             } else {
@@ -93,45 +93,60 @@ if (count($_POST) > 0) {
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
-<body>
+<body class="seat-page">
+
 
     <div class="content">
 
-        <?php
-    echo "the seat assinged is ", $newab;
-    ?>
+        <ul class='topnav'>
+            <li><a class='logo' href='index.html'>The Venue</a></li>
+            <li class='right'><a href='venue.php'>Select Seat</a></li>
+            <li class='right'><a href='about.php'>About</a></li>
+            <li class='right'><a class='active' href='index.php'>Home</a></li>
+        </ul>
 
-        <div>
-            <a href="confirm">Yes</a>
-            <a>No, I want to exit</a>
-            <a>Select more seats</a>
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content">
+                
+                    <span onclick="document.getElementById('id01').style.display='none'"
+                        class="w3-button w3-display-topright">&times;</span>
+                    <form class="w3-container w3-card-4" action="confirm.php">
+                        <h2 class="w3-text-black">Personal Info</h2>
+                        <p>Enter personal information for your booking.</p>
+                        <p>
+                            <label class="w3-text-black"><b>First and Last Name</b></label>
+                            <input class="w3-input w3-border" name="names" type="text"></p>
+                        <p>
+                            <label class="w3-text-black"><b>Email</b></label>
+                            <input class="w3-input w3-border" name="email" type="text"></p>
+                        <p>
+                            <button class="w3-btn w3-black">Confirm Order</button></p>
+                    </form>
+
+                
+            </div>
         </div>
 
-        <div class="w3-container">
-            <h1>WOuld you like to confirm your order?</h1>
-            <button onclick="document.getElementById('id01').style.display='block'"
-                class="w3-button w3-black">Yes</button>
-            <a class="w3-btn w3-black" href="index.html">No, I want to exit</a>
-            <div id="id01" class="w3-modal">
-                <div class="w3-modal-content">
-                    <div class="w3-container">
-                        <span onclick="document.getElementById('id01').style.display='none'"
-                            class="w3-button w3-display-topright">&times;</span>
-                        <form class="w3-container w3-card-4" action="confirm.php">
-                            <h2 class="w3-text-blue">Input Form</h2>
-                            <p>Use any of the w3-text-color classes to color your labels.</p>
-                            <p>
-                                <label class="w3-text-blue"><b>First and Last Name</b></label>
-                                <input class="w3-input w3-border" name="first" type="text"></p>
-                            <p>
-                                <label class="w3-text-blue"><b>Email</b></label>
-                                <input class="w3-input w3-border" name="last" type="text"></p>
-                            <p>
-                                <button class="w3-btn w3-blue">Confirm Order</button></p>
-                        </form>
+        <div class="w3-display-middle w3-padding">
 
-                    </div>
-                </div>
+
+            <?php
+                echo "<h1> Best Seat Option: ", $newab . "</h1>";
+                $_SESSION['seat-num'] = $newab;
+            ?>
+
+            <div class="w3-container w3-center">
+                <br><br>
+                <h4 class="w3-center">Would you like to confirm your order?</h4>
+                <br><br>
+                <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Yes,
+                    confirm</button>
+                <p>
+                    <a class="w3-btn w3-black" href="index.html">No, I want to exit</a> </p>
+
+
+
+
             </div>
         </div>
 
