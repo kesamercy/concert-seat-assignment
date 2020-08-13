@@ -4,77 +4,107 @@ session_start();
 if (count($_POST) > 0) {
 
     $seats = $_SESSION['seats-available'];
-    $numseats = $_POST['seat-choice'];
-
-    // print_r($seats);
-
+    $seatrequest = $_POST['seat-choice'];
     $numrows = $_SESSION['rows'];
     $numcols = $_SESSION['cols'];
+    $seatassigned = false;
 
-    // echo $numcols, "the number of rows";
-    // echo $numrows, "the number of cols";
+    if ($seatrequest == 1) {
 
-    $a = 1;
-    $b = 1;
-    $count = 0;
-    $time = 0;
+        // check the rows only if a seat has not been assigned
+        for ($row = 1; $row <= $numrows; $row++ && !$seattocheck) {
+            $postn = 1;
+            $seatscounted = 1;
+            $checkmiddle = false;
+           
+            $checkleft = false;
+            $checkright = false;
+            while ($seatscounted <= $numcols && !$seatassigned) {
+                //    first check the middle seat for assignment
+                if (!$checkmiddle) {
+                    $mid = $numcols / 2;
+                    $stra = strval($row);
+                    $strb = strval($mid);
+                    $seattocheck = $stra . $strb;
 
-    $status = false;
-    $rightChecked = false;
+                    // check the array of seats available to find if it matches the current seat
+                    foreach ($seats as $key => $value) {
 
-    $mid = ceil($numcols / 2);
+                        // if the middle seat is available, assign it
+                        if ($seattocheck == $value) {
+                            $seatassigned = true;
+                            echo $seattocheck, "this is the seat";
+                            break;
+                        }
 
-    while ($a <= $numrows && !$status) {
+                    }
 
-        $mid = ceil($numcols / 2);
-        $count = 0;
-        while ($b != $numcols && !$status) {
-            $mid = ceil($numcols / 2);
-            if ($rightChecked = false && $time != 0) {
-                $mid = $mid + $count;
-                $rightChecked = true;
-            } else {
-                $mid = $mid - $count;
-                $rightChecked = false;
-            }
+                    $checkmiddle = true;
+                } else {
+                    //   check the left postion
+                    if (!$checkright) {
+                        $findseat = ($numcols / 2) + $postn;
+                        $stra = strval($row);
+                        $strb = strval($findseat);
+                        $seattocheck = $stra . $strb;
 
-            $stra = strval($a);
-            $strb = strval($mid);
-            $newab = $stra . $strb;
+                        // check the array of seats available to find if it matches the current seat
+                        foreach ($seats as $key => $value) {
 
-            // check if the middle seat appears in the array for the available seats
-            foreach ($seats as $key => $value) {
+                            // if the middle seat is available, assign it
+                            if ($seattocheck == $value) {
+                                $seatassigned = true;
+                                echo $seattocheck, "this is the seat";
+                                break;
+                            }
 
-                // echo $value;
-                // echo "<br>";
-                // echo "the value for ab";
-                // echo $newab;
-                if ($newab == $value) {
-                    $status = true;
-                    break;
+                        }
+                        $checkright = true;
+                        ++$seatscounted;
+                    }
+                    elseif (!$checkleft) {
+                        $findseat = ($numcols / 2) - $postn;
+                        $stra = strval($row);
+                        $strb = strval($findseat);
+                        $seattocheck = $stra . $strb;
+
+                        // check the array of seats available to find if it matches the current seat
+                        foreach ($seats as $key => $value) {
+
+                            // if the middle seat is available, assign it
+                            if ($seattocheck == $value) {
+                                $seatassigned = true;
+                                echo $seattocheck, "this is the seat";
+                                break;
+                            }
+
+                        }
+
+                        $checkleft = true;
+                        ++$seatscounted;
+                    } 
+                    elseif($checkleft && $checkright && !$seatassigned) {
+                        $checkleft = false;
+                        $checkright = false;
+                        ++$postn;
+                        
+
+                    }
+
                 }
-
+                
             }
-
-            ++$time;
-            if ($status) {
-                # return the seat assigned
-                // echo "the seat assinged is ", $newab;
-
-                break;
-            } else {
-                //update mid to check for the next value on the right
-
-                ++$count;
-
-            }
-            ++$b;
         }
-        ++$a;
+    } elseif ($seatrequest == 2) {
+        echo "2 seat request";
+    } elseif ($seatrequest == 3) {
+        echo "2 seat request";
+    } else {
+        echo "Invalid number of seats requested";
     }
 
 } else {
-    echo "error, the prog did not work";
+    echo "error, submission not valid";
 }
 
 ?>
@@ -130,20 +160,22 @@ if (count($_POST) > 0) {
 
 
             <?php
-            $arrayletters = array('0','A','B','C','D','E','F','G','H','I','J','K', 'L','M','N','O','P','Q','R','S','T','U','V','W','X ','Y','Z');
-            // get the first char of the string 
-            // convert row to a string 
-            // add it back to newab and then display the number 
-                $getrow = $newab[0];
-                $getnum = $newab[1];
+                $arrayletters = array('0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X ', 'Y', 'Z');
+                // get the first char of the string
+                // convert row to a string
+                // add it back to newab and then display the number
+                $getrow = $seattocheck[0];
+                $getnum = $seattocheck[1];
                 $rowletter = $arrayletters[$getrow];
                 $newseat = $rowletter . $getnum;
 
                 echo "<h1> Best Seat Option: ", $newseat . "</h1>";
+
+                // print_r($seats);
+
                 $_SESSION['seat-num'] = $newseat;
 
-
-            ?>
+                ?>
 
             <div class="w3-container w3-center">
                 <br><br>
