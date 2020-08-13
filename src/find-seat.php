@@ -14,8 +14,8 @@ if (count($_POST) > 0) {
     // echo $numcols, "the number of rows";
     // echo $numrows, "the number of cols";
 
-    $a = 0;
-    $b = 0;
+    $a = 1;
+    $b = 1;
     $count = 0;
     $time = 0;
 
@@ -130,8 +130,19 @@ if (count($_POST) > 0) {
 
 
             <?php
-                echo "<h1> Best Seat Option: ", $newab . "</h1>";
-                $_SESSION['seat-num'] = $newab;
+            $arrayletters = array('0','A','B','C','D','E','F','G','H','I','J','K', 'L','M','N','O','P','Q','R','S','T','U','V','W','X ','Y','Z');
+            // get the first char of the string 
+            // convert row to a string 
+            // add it back to newab and then display the number 
+                $getrow = $newab[0];
+                $getnum = $newab[1];
+                $rowletter = $arrayletters[$getrow];
+                $newseat = $rowletter . $getnum;
+
+                echo "<h1> Best Seat Option: ", $newseat . "</h1>";
+                $_SESSION['seat-num'] = $newseat;
+
+
             ?>
 
             <div class="w3-container w3-center">

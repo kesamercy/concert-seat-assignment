@@ -180,7 +180,7 @@ function parseJsonFile($filename)
                         }
                         echo "</tr>";
                         ++$a;
-                        $b = 0;
+                        $b = 1;
                     }
                     echo "</table>"
 
