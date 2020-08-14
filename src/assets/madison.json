@@ -24,16 +24,16 @@
             "column": 3,
             "status": "AVAILABLE"
         },
-        "e4": {
-            "id": "e4",
-            "row": "e",
-            "column": 4,
+        "c1": {
+            "id": "c1",
+            "row": "c",
+            "column": 1,
             "status": "AVAILABLE"
         },
-        "d2": {
-            "id": "d2",
-            "row": "d",
-            "column": 2,
+        "c7": {
+            "id": "c7",
+            "row": "c",
+            "column": 7,
             "status": "AVAILABLE"
         },
         "g8": {
