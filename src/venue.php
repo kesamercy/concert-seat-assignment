@@ -83,7 +83,7 @@ function parseJsonFile($filename)
                     echo "<h1 class='w3-padding-32'>Criscross Raging Ball Seating.</h1>";
                 } elseif ($venue == "kenedy") {
                     parseJsonFile("assets/kenedy.json");
-                    echo "<h1 class='w3-padding-32'>JF Kenedey Center Seating.</h1>";
+                    echo "<h1 class='w3-padding-32'>JF Kenedy Center Seating.</h1>";
                 } else {
                     echo "Error, invalid input";
                 }
