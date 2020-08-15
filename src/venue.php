@@ -28,6 +28,7 @@ function parseJsonFile($filename)
             $fileContent = json_decode($json, true);
             $numRows = $fileContent['venue']['layout']['rows'];
             $numCols = $fileContent['venue']['layout']['column'];
+            $seats = array($availableSeat);
 
             //loop through the json file to find all available seats.Update the array 'seats' which carries the collection of all seats available
             foreach ($fileContent['seats'] as $key => $value) {
@@ -79,7 +80,7 @@ function parseJsonFile($filename)
                     echo "<h1 class='w3-padding-32'>Madison Square Garden Seating</h1>";
                 } elseif ($venue == "criscross") {
                     parseJsonFile("assets/criscross.json");
-                    echo "<h1 class='w3-padding-32'>Criscross Seating.</h1>";
+                    echo "<h1 class='w3-padding-32'>Criscross Raging Ball Seating.</h1>";
                 } elseif ($venue == "kenedy") {
                     parseJsonFile("assets/kenedy.json");
                     echo "<h1 class='w3-padding-32'>JF Kenedey Center Seating.</h1>";
