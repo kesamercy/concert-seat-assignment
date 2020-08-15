@@ -14,7 +14,7 @@ html {
 /* nav bar styling */
 
 
-/* nav bar sytles for mobile and desktop */
+/* nav bar sytles desktop */
 
 ul.topnav {
     list-style-type: none;
@@ -85,6 +85,6 @@ ul.topnav li.right {
     color: black;
 }
 
-.seat-arrangment {
-    /* width: 50%; */
+.description-container {
+    height: 90vh;
 }

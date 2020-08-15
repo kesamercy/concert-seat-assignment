@@ -18,7 +18,7 @@ use Codeception\Util\Template;
  * Saves a screenshot of each step in acceptance tests and shows them as a slideshow on one HTML page (here's an [example](http://codeception.com/images/recorder.gif))
  * Activated only for suites with WebDriver module enabled.
  *
- * The screenshots are saved to `tests/_output/record_*` directories, open `index.html` to see them as a slideshow.
+ * The screenshots are saved to `tests/_output/record_*` directories, open `index.php` to see them as a slideshow.
  *
  * #### Installation
  *
@@ -518,7 +518,7 @@ EOF;
                 ->place('carousel_class', $this->config['animate_slides'] ? ' slide' : '')
                 ->produce();
 
-            $indexFile = $this->dir . DIRECTORY_SEPARATOR . 'index.html';
+            $indexFile = $this->dir . DIRECTORY_SEPARATOR . 'index.php';
             $environment = $e->getTest()->getMetadata()->getCurrent('env') ?: '';
             $suite = ucfirst(basename(\dirname($e->getTest()->getMetadata()->getFilename())));
             $testName = basename($e->getTest()->getMetadata()->getFilename());
@@ -529,7 +529,7 @@ EOF;
                 $this->skipRecording[] = $testPath;
                 $this->appendErrorMessage(
                     $testPath,
-                    "⏺ An exception occurred while saving index.html for <info>{$testPath}: "
+                    "⏺ An exception occurred while saving index.php for <info>{$testPath}: "
                     . "{$exception->getMessage()}</info>"
                 );
             }
