@@ -6,8 +6,8 @@
         }
     },
     "seats": {
-        "j8": {
-            "id": "j8",
+        "i8": {
+            "id": "i8",
             "row": "i",
             "column": 8,
             "status": "AVAILABLE"

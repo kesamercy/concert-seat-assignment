@@ -16,6 +16,7 @@ if (count($_POST) > 0) {
     $mid = ceil($numCols / 2);
     $status = false;
     $seatToCheck = array();
+    $nextSeat = 1;
 
     if ($seatRequest == ONE_SEAT) {
         for ($row = 1; $row <= $numRows; $row++ && !$seatAssigned) {
@@ -73,7 +74,6 @@ if (count($_POST) > 0) {
 
                 } elseif ($checkLeft && $checkRight && !$seatAssigned) {
                     resetFunctionVariables();
-
                 }
 
             }
@@ -86,7 +86,6 @@ if (count($_POST) > 0) {
             while ($seatsCounted <= $numCols && !$seatAssigned) {
 
                 if (!$checkMiddleSeat) {
-
                     $leftseat = false;
                     $rightseat = false;
 
@@ -94,8 +93,8 @@ if (count($_POST) > 0) {
 
                     if ($status) {
 
-                        $midright = $mid + 1;
-                        $midleft = $mid - 1;
+                        $midright = $mid + $nextSeat;
+                        $midleft = $mid - $nextSeat;
 
                         $seatTocheckRight = convertSeatFromIntToString($row, $midright);
                         $seatTocheckLeft = convertSeatFromIntToString($row, $midleft);
@@ -105,11 +104,9 @@ if (count($_POST) > 0) {
 
                         if ($statusForRightSeat) {
                             $rightseat = true;
-
                         }
                         if ($statusForLeftSeat) {
                             $leftseat = true;
-
                         }
 
                         if ($leftseat && $rightseat) {
@@ -126,20 +123,16 @@ if (count($_POST) > 0) {
                                 $leftmidleft = $midleft - 1;
                                 processThreeSeatAllocation($row, $midleft, $seatTocheckLeft);
                             }
-
-
                     }
                     $checkMiddleSeat = true;
-
                 } else if (!$checkRight) {
                     $findSeat = $mid + $postn;
                     $status = determineIfSeatIsAvailable($row, $findSeat);
 
                     if ($status) {
 
-                        $midright = $findSeat + 1;
+                        $midright = $findSeat + $nextSeat;
                         determineThreeSeatsAvailablilty($row, $midright, false);
-
                     }
                     $checkRight = markSeatAsChecked($checkRight);
 
@@ -148,43 +141,38 @@ if (count($_POST) > 0) {
                     $status = determineIfSeatIsAvailable($row, $findSeat);
 
                     if ($status) {
-                        $midleft = $findSeat - 1;
+                        $midleft = $findSeat - $nextSeat;
                         determineThreeSeatsAvailablilty($row, $midleft, true);
                     }
-
                     $checkLeft = markSeatAsChecked($checkLeft);
 
                 } elseif ($checkLeft && $checkRight && !$seatAssigned) {
                     resetFunctionVariables();
                 }
-
             }
         }
     } else {
         echo "Invalid number of seats requested";
     }
-
 } else {
     echo "error, submission not valid";
 }
 
 function determineThreeSeatsAvailablilty($row, $col, $left)
 {
+    global $nextSeat;
 
     $seatTocheck = convertSeatFromIntToString($row, $col);
     $seatTocheckStatus = findSeatAmongSeatsAvailable($seatTocheck);
 
     if ($seatTocheckStatus) {
         if ($left) {
-            $leftSeat = $col - 1;
+            $leftSeat = $col - $nextSeat;
         } else {
-            $leftSeat = $col + 1;
+            $leftSeat = $col + $nextSeat;
         }
-
         processThreeSeatAllocation($row, $leftSeat, $seatTocheck);
-
     }
-
 }
 
 function processThreeSeatAllocation($row, $col, $secondSeat)
@@ -197,10 +185,8 @@ function processThreeSeatAllocation($row, $col, $secondSeat)
     $thirdSeatStatus = findSeatAmongSeatsAvailable($secondSeat);
 
     if ($thirdSeatStatus) {
-
         array_push($threeSeats, $seatToCheck, $secondSeat, $thirdSeat);
         $seatAssigned = true;
-
     }
 
 }
@@ -212,7 +198,6 @@ function markSeatAsChecked($seatChecked)
     ++$seatsCounted;
 
     return $seatChecked;
-
 }
 
 function resetFunctionVariables()
@@ -238,7 +223,6 @@ function initializeFunctionVariables()
     $postn = 1;
     $seatsCounted = 1;
     $checkMiddleSeat = false;
-
     $checkLeft = false;
     $checkRight = false;
 }
@@ -246,7 +230,6 @@ function initializeFunctionVariables()
 function convertIntToAlphabet($i)
 {
     $arrayletters = array('0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X ', 'Y', 'Z');
-
     $letter = $arrayletters[$i];
 
     return $letter;
@@ -257,9 +240,7 @@ function processSeatStatus($status)
 
     if ($status) {
         $seatAssigned = true;
-
     }
-
 }
 
 function processSingleSeatRequest($row, $col)
@@ -270,37 +251,31 @@ function processSingleSeatRequest($row, $col)
 
 function processTwoSeatRequest($row, $col)
 {
-
     global $seatToCheck;
     global $seatAssigned;
     global $twoSeats;
+    global $nextSeat;
 
     $status = determineIfSeatIsAvailable($row, $col);
 
     if ($status) {
 
-        // check if the neigh seat
-        $midright = $col + 1;
-        $midleft = $col - 1;
+        $midright = $col + $nextSeat;
+        $midleft = $col - $nextSeat;
 
         $seatTocheckRight = convertSeatFromIntToString($row, $midright);
         $seatTocheckLeft = convertSeatFromIntToString($row, $midleft);
-
         $statusForRightSeat = findSeatAmongSeatsAvailable($seatTocheckRight);
         $statusForLeftSeat = findSeatAmongSeatsAvailable($seatTocheckLeft);
 
         if ($statusForRightSeat) {
             array_push($twoSeats, $seatToCheck, $seatTocheckRight);
-
             $seatAssigned = true;
-
         } else if ($statusForLeftSeat) {
             array_push($twoSeats, $seatToCheck, $seatTocheckLeft);
             $seatAssigned = true;
-
         }
     }
-
 }
 ?>
 
@@ -319,87 +294,70 @@ function processTwoSeatRequest($row, $col)
 
 <body class="seat-page">
 
-
     <div class="content">
 
         <ul class='topnav'>
             <li><a class='logo' href='index.php'>The Venue</a></li>
-
         </ul>
-
         <div class="w3-display-middle w3-padding">
 
-
             <?php
-        if ($seatRequest == ONE_SEAT) {
+                if ($seatRequest == ONE_SEAT) {
+                    if (!empty($seatToCheck)) {
+                        $rowNum = $seatToCheck[0];
+                        $colNum = $seatToCheck[1];
+                        $rowLetter = convertIntToAlphabet($rowNum);
+                        $finalseatAssigned = $rowLetter . $colNum;
 
-            if (!empty($seatToCheck)) {
-                $rowNum = $seatToCheck[0];
-                $colNum = $seatToCheck[1];
-                $rowLetter = convertIntToAlphabet($rowNum);
-                $finalseatAssigned = $rowLetter . $colNum;
+                        echo "<h1> Best Seat Option: ", $finalseatAssigned . "</h1>";
+                    } else {
+                        echo "<h1>Sorry, no seats available</h1>";
+                    }
+                } elseif ($seatRequest == TWO_SEAT) {
+                    if (!empty($twoSeats)) {
 
-                echo "<h1> Best Seat Option: ", $finalseatAssigned . "</h1>";
-            } else {
-                echo "<h1>Sorry, no seats available</h1>";
-            }
+                        $getfirstseat = $twoSeats[0][0];
+                        $seatletterone = convertIntToAlphabet($getfirstseat);
+                        $firstcolnum = $twoSeats[0][1];
+                        $seatone = $seatletterone . $firstcolnum;
 
-        } elseif ($seatRequest == TWO_SEAT) {
+                        $getsecondseat = $twoSeats[1][0];
+                        $seatlettertwo = convertIntToAlphabet($getsecondseat);
+                        $secondcolnum = $twoSeats[1][1];
+                        $seattwo = $seatlettertwo . $secondcolnum;
 
-            if (!empty($twoSeats)) {
+                        echo "<h1> Best Seat Option: ", $seatone . " , ", $seattwo . "</h1>";
+                    } else {
+                        echo "<h1>Sorry, two seats are not available</h1>";
+                    }
+                } elseif ($seatRequest == THREE_SEAT) {
+                    if (!empty($threeSeats)) {
 
-                $getfirstseat = $twoSeats[0][0];
-                $seatletterone = convertIntToAlphabet($getfirstseat);
-                $firstcolnum = $twoSeats[0][1];
-                $seatone = $seatletterone . $firstcolnum;
+                        $getfirstseat = $threeSeats[0][0];
+                        $seatletterone = convertIntToAlphabet($getfirstseat);
+                        $firstcolnum = $threeSeats[0][1];
+                        $seatone = $seatletterone . $firstcolnum;
 
-                $getsecondseat = $twoSeats[1][0];
-                $seatlettertwo = convertIntToAlphabet($getsecondseat);
-                $secondcolnum = $twoSeats[1][1];
-                $seattwo = $seatlettertwo . $secondcolnum;
+                        $getsecondseat = $threeSeats[1][0];
+                        $seatlettertwo = convertIntToAlphabet($getsecondseat);
+                        $secondcolnum = $threeSeats[1][1];
+                        $seattwo = $seatlettertwo . $secondcolnum;
 
-                echo "<h1> Best Seat Option: ", $seatone . " , ", $seattwo . "</h1>";
-            } else {
-                echo "<h1>Sorry, two seats are not available</h1>";
-            }
+                        $getthirdseat = $threeSeats[2][0];
+                        $seatletterthree = convertIntToAlphabet($getthirdseat);
+                        $thirdcolnum = $threeSeats[2][1];
+                        $seatthree = $seatletterthree . $thirdcolnum;
 
-        } elseif ($seatRequest == THREE_SEAT) {
-
-            if (!empty($threeSeats)) {
-                # code...
-
-                $getfirstseat = $threeSeats[0][0];
-                $seatletterone = convertIntToAlphabet($getfirstseat);
-                $firstcolnum = $threeSeats[0][1];
-                $seatone = $seatletterone . $firstcolnum;
-
-                $getsecondseat = $threeSeats[1][0];
-                $seatlettertwo = convertIntToAlphabet($getsecondseat);
-                $secondcolnum = $threeSeats[1][1];
-                $seattwo = $seatlettertwo . $secondcolnum;
-
-                $getthirdseat = $threeSeats[2][0];
-                $seatletterthree = convertIntToAlphabet($getthirdseat);
-                $thirdcolnum = $threeSeats[2][1];
-                $seatthree = $seatletterthree . $thirdcolnum;
-
-                echo "<h1> Best Seat Option: ", $seatone . " , ", $seattwo . ", ", $seatthree . "</h1>";
-            } else {
-                echo "<h1>Sorry, three seats are not available</h1>";
-            }
-
-        }
-
-        ?>
-
+                        echo "<h1> Best Seat Option: ", $seatone . " , ", $seattwo . ", ", $seatthree . "</h1>";
+                    } else {
+                        echo "<h1>Sorry, three seats are not available</h1>";
+                    }
+                }
+            ?>
             <div class="w3-container w3-center">
                 <br><br>
                 <p>
                     <a class="w3-btn w3-black" href="index.php">Thank you, order complete</a> </p>
-
-
-
-
             </div>
         </div>
 
