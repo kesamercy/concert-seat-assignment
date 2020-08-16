@@ -15,21 +15,22 @@ Therefore, once a seat has been assigned, if the user returns to the home page o
 The program was built with PHP as the backend and HTML/CSS for the front-end.
 
 ## Instructions for deploying and executing the tests
-Prerequisites:
 
-### Remote Server Access
+## Prerequisites:
+
+#### Remote Server Access
 1. With access to a remote server, clone the git repository into a directory of your choice on the server.
 2. Navigate to that directory and then go to concert-seat-assignment/src/index.php to access the home-page of the application and begin a walkthrough as a user.
 
-### Local Server Access
-1. Set up Xampp local server https://www.ionos.com/digitalguide/server/tools/xampp-tutorial-create-your-own-local-test-server/
+#### Local Server Access
+1. Set up [Xampp local server] (https://www.ionos.com/digitalguide/server/tools/)xampp-tutorial-create-your-own-local-test-server/
 2. Clone the repository into htdocs folder found in the Xampp server directory.
-3. In your browser navigate to localhost http://localhost/concert-seat-assignment/src/ to find the home page of the application and begin a walkthrough as a user.
+3. In your browser navigate to localhost ```http://localhost/concert-seat-assignment/src/``` to find the home page of the application and begin a walkthrough as a user.
 
-Executing Tests
+## Executing Tests
 1. To run the tests, the project will need to be cloned onto your local server and using the terminal, navigate to the directory of the project: yourpath/htdocs/concert-seat-assignment/src/
 
-2. run the command PHP vendor/bin/codecept run --steps to execute the tests.
+2. run the command ```php vendor/bin/codecept run --steps``` to execute the tests.
 
 
 # Design Overview
@@ -49,4 +50,6 @@ To explore the behavior of the algorithm for different seat availability, one ca
 
 Due to the simplicity, and abiding by minimum functionality standards for this exercise, the program is guaranteed to return correct results for the defined cases in the JSON files, for more robust edge cases with increased rows and columns in the venue layouts, the program functions might need to be modified to return more accurate results.
 
+
+<a href="https://ibb.co/QvV5Vr2"><img src="https://i.ibb.co/0yLwLhg/Concert-Seats.png" raw=true alt="Concert-Seats" border="0"></a>
 
