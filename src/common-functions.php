@@ -7,7 +7,6 @@ function determineIfSeatIsAvailable($row, $col)
     $seatStatus = false;
 
     $seatToCheck = convertSeatFromIntToString($row, $col);
-
     $seatStatus = findSeatAmongSeatsAvailable($seatToCheck);
 
     return $seatStatus;
@@ -20,7 +19,6 @@ function convertSeatFromIntToString($row, $col)
     $seatInStringForm = $rowString . $colString;
 
     return $seatInStringForm;
-
 }
 
 
@@ -31,9 +29,7 @@ function findSeatAmongSeatsAvailable($seat)
 
     if (in_array($seat, $seats)) {
         $status = true;
-
     }
 
     return $status;
-
 }

@@ -37,12 +37,10 @@ function parseJsonFile($filename)
                 $availableSeat = convertSeatFromIntToString($postn, $value['column']);
                 array_push($seats, $availableSeat);
             }
-
             $_SESSION['seats-available'] = $seats;
         } else {
             echo "Error, Json file has no content";
         }
-
     } else {
         echo "Error, The file does not exist.";
     }
@@ -65,61 +63,56 @@ function parseJsonFile($filename)
 <body class="venue-content">
 
     <div class="content">
-
         <ul class='topnav'>
             <li><a class='logo' href='index.php'>The Venue</a></li>
         </ul>
-
         <div class="w3-row">
-
             <div class="w3-half seat-arrangment w3-center">
 
                 <?php
-                if ($venue == "madison") {
-                    parseJsonFile("assets/madison.json");
-                    echo "<h1 class='w3-padding-32'>Madison Square Garden Seating</h1>";
-                } elseif ($venue == "criscross") {
-                    parseJsonFile("assets/criscross.json");
-                    echo "<h1 class='w3-padding-32'>Criscross Raging Ball Seating.</h1>";
-                } elseif ($venue == "kenedy") {
-                    parseJsonFile("assets/kenedy.json");
-                    echo "<h1 class='w3-padding-32'>JF Kenedy Center Seating.</h1>";
-                } else {
-                    echo "Error, invalid input";
-                }
-                    global $a;
-                    global $b;
-                    $status = false;
-                    $_SESSION['rows'] = $numRows;
-                    $_SESSION['cols'] = $numCols;
-                    $reset = 1;
-
-                    echo "<table class='w3-table'>";
-                    while ($a <= $numRows) {
-                        echo "<tr>";
-                        while ($b <= $numCols) {
-                            $status = determineIfSeatIsAvailable($a, $b);
-                            if ($status) {
-                                echo " <td><img src='images/empty-seat.png' alt='occupied seat'></td>";
-                            } else {
-                                echo " <td><img src='images/occupied-seat.png' alt='occupied seat'></td>";
-                            }
-                            $status = false;
-                            ++$b;
-                        }
-                        echo "</tr>";
-                        ++$a;
-                        $b = $reset;
+                    if ($venue == "madison") {
+                        parseJsonFile("assets/madison.json");
+                        echo "<h1 class='w3-padding-32'>Madison Square Garden Seating</h1>";
+                    } elseif ($venue == "criscross") {
+                        parseJsonFile("assets/criscross.json");
+                        echo "<h1 class='w3-padding-32'>Criscross Raging Ball Seating.</h1>";
+                    } elseif ($venue == "kenedy") {
+                        parseJsonFile("assets/kenedy.json");
+                        echo "<h1 class='w3-padding-32'>JF Kenedy Center Seating.</h1>";
+                    } else {
+                        echo "Error, invalid input";
                     }
-                    echo "</table>"
+                        global $a;
+                        global $b;
+                        $status = false;
+                        $_SESSION['rows'] = $numRows;
+                        $_SESSION['cols'] = $numCols;
+                        $reset = 1;
 
-                    ?>
+                        echo "<table class='w3-table'>";
+                        while ($a <= $numRows) {
+                            echo "<tr>";
+                            while ($b <= $numCols) {
+                                $status = determineIfSeatIsAvailable($a, $b);
+                                if ($status) {
+                                    echo " <td><img src='images/empty-seat.png' alt='occupied seat'></td>";
+                                } else {
+                                    echo " <td><img src='images/occupied-seat.png' alt='occupied seat'></td>";
+                                }
+                                $status = false;
+                                ++$b;
+                            }
+                            echo "</tr>";
+                            ++$a;
+                            $b = $reset;
+                        }
+                        echo "</table>"
+                ?>
             </div>
             <div class="w3-half seat-form w3-center">
                 <form method="post" action="find-seat.php">
                     <p>
                     <label for="seat-choice"> <h3> How many seats would you like to book:</h3></label></p>
-
                     <select class="w3-select w3-center" id="seat-choice" name="seat-choice">
                         <option value="1">1</option>
                         <option value="2">2</option>
