@@ -25,7 +25,7 @@ The program was built with PHP as the backend and HTML/CSS for the front-end.
 #### Local Server Access
 1. Set up [Xampp local server](https://www.ionos.com/digitalguide/server/tools/xampp-tutorial-create-your-own-local-test-server/)
 2. Clone the repository into htdocs folder found in the Xampp server directory.
-3. In your browser navigate to localhost ```http://localhost/concert-seat-assignment/src/``` to find the home page of the application and begin a walkthrough as a user.
+3. In your browser navigate to localhost ```http://localhost/concert-seat-assignment/``` to find the home page of the application and begin a walkthrough as a user.
 
 ## Executing Tests
 1. To run the tests, the project will need to be cloned onto your local server and using the terminal, navigate to the directory of the project: yourpath/htdocs/concert-seat-assignment/src/
